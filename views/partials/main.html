@@ -1,0 +1,11 @@
+<div ng-include="'partials/navbar'"></div>
+
+<div class="form-group">
+  <label for="inputHomeTeam" class="control-label">Home Team</label>
+  <select ng-model="homeTeam" class="form-control" ng-options="team.name for team in teams"></select>
+  <label for="inputAwayTeam" class="control-label">Away Team</label>
+  <select ng-model="awayTeam" class="form-control" ng-options="team.name for team in teams"></select>
+  <br>
+
+  <button class="btn btn-default" ng-if="homeTeam != '' && awayTeam != ''" id="play" ng-click="setTeams(homeTeam,awayTeam);">Play Ball</button>
+</div>

@@ -1,0 +1,68 @@
+<div ng-include="'partials/navbar'"></div>
+
+<div class="container">
+  <div style="display:inline-block; margin-left: auto; margin-right: auto">
+    <div class="scoreboard">
+      <div class="at-bat">
+        <div class="at-bat-elem">
+          BALL<div class="big-light">{{innData.atBat.ball}}</div>
+        </div>
+        <div class="at-bat-elem">
+          STRIKE<div class="big-light">{{innData.atBat.strike}}</div>
+        </div>
+        <div class="at-bat-elem">
+          OUT<div class="big-light">{{innData.outs}}</div>
+        </div>
+      </div>
+      <div class="score">
+        <div class="score-header">
+          <div></div>
+          <div ng-repeat="inning in [1,2,3,4,5,6,7,8,9]">{{$index+1}}</div>
+          <div>TOTAL</div>
+        </div>
+      
+        <div class="team-score">
+          <div>{{awayTeam.id | uppercase}}</div>
+          <div ng-repeat="aScore in awayTeam.score.inning">{{aScore.score}}</div>
+          <div>{{awayTeam.score.total}}</div>
+        </div>
+
+        <div class="team-score">
+          <div>{{homeTeam.id | uppercase}}</div>
+          <div ng-repeat="hScore in homeTeam.score.inning">{{hScore.score}}</div>
+          <div>{{homeTeam.score.total}}</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="keep-score">
+      <div class="lineup away-lineup" ng-class="{'inning-highlight': innData.top}">
+        <div class="team-name">{{awayTeam.id | uppercase}}</div>
+        <div ng-repeat="player in awayLineup | orderBy:'battingPosition'" class="player" ng-class="{'player-at-bat': player.atBat, 'player-up-next': player.nextUp}">{{player.name.first.charAt(0) + '. ' + player.name.last}}</div>
+      </div>
+      <div class="actions" ng-if="gameOver !== true">
+        <div class="at-bat-actions">
+          <button ng-click="ball()">Ball</button>
+          <button ng-click="strike()">Strike</button>
+        </div>
+        <div class="at-bat-outcomes">
+          <button ng-click="out()">Out</button>
+          <button ng-click="hit(1)">Single</button>
+          <button ng-click="hit(2)">Double</button>
+          <button ng-click="hit(3)">Triple</button>
+          <button ng-click="hit(4)">Home Run</button>
+        </div>
+      </div>
+      <div class="game-over" ng-if="gameOver">
+        GAME OVER
+      </div>
+      <div class="lineup home-lineup" ng-class="{'inning-highlight': !innData.top}">
+        <div class="team-name">{{homeTeam.id | uppercase}}</div>
+        <div ng-repeat="player in homeLineup | orderBy:'battingPosition'" class="player" ng-class="{'player-at-bat': player.atBat, 'player-up-next': player.nextUp}">{{getBatterName(player)}}</div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="tweets">
+  <div class="alert alert-info" ng-repeat="tweet in tweets track by $id(tweet)">{{tweet}}</div>
+</div>
