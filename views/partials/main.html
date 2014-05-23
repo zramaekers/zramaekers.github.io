@@ -1,4 +1,4 @@
-<div ng-include="'partials/navbar'"></div>
+<div ng-include="'views/partials/navbar'"></div>
 
 <div class="form-group">
   <label for="inputHomeTeam" class="control-label">Home Team</label>
@@ -7,5 +7,5 @@
   <select ng-model="awayTeam" class="form-control" ng-options="team.name for team in teams"></select>
   <br>
 
-  <button class="btn btn-default" ng-if="homeTeam != '' && awayTeam != ''" id="play" ng-click="setTeams(homeTeam,awayTeam);">Play Ball</button>
+  <button class="btn btn-default" ng-if="homeTeam !== null && awayTeam !== null" id="play" ng-click="setTeams(homeTeam,awayTeam);">Play Ball</button>
 </div>
